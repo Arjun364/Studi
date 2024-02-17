@@ -12,14 +12,14 @@ function NavigationBar() {
                 </div>
                 <div className="middle-section">
                     <ul className="menu-list">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Services</a></li>
-                        <li><a href="">contact us</a></li>
+                        <li><a className='navigation-Text-Style' href="">Home</a></li>
+                        <li><a className='navigation-Text-Style' href="">About</a></li>
+                        <li><a className='navigation-Text-Style' href="">Services</a></li>
+                        <li><a className='navigation-Text-Style' href="">contact us</a></li>
                     </ul>
                 </div>
                 <div className="right-section">
-                    <button className="btn">Get Started </button>
+                    <button className="btn btn-text-style">Get Started </button>
                     {/* icon - Home */}
                     {/* <FaHome className='icon'/> */}
                 </div>

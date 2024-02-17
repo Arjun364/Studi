@@ -20,9 +20,7 @@
 } */
 
 .main-heading {
-    font-family: var(--poppins);
     font-weight:500;
-    font-size: var(--heading1);
 }
 .main-heading .upper-section{
     position: relative;   
@@ -31,6 +29,4 @@
 
 .overview-section{
     width: 28.188rem;
-    font-family: var(--poppins);
-    font-size: var(--normalTextStyle);
 }

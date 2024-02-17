@@ -1,0 +1,56 @@
+.service-container{
+    width: 100%;
+    height:  86.92vh;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url('../../assets/ServiceBase.svg');
+    gap: 3rem;
+}
+
+.service-container .top-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-lineHoriz{
+    width: 30rem;
+    height: .15rem;
+    background-color: black;
+}
+
+.service-container .bottom-section {
+    width: 75.313rem;
+    height: 25.813rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.service-container .slider{
+    width: 53.125rem;
+    height: 22.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    /* border: .1rem solid black; */
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: .3rem .4rem .9rem rgba(0, 0, 0, 0.463); 
+}
+
+.service-container p{
+    width: 45.438rem;
+    /* text-align: center; */
+}
+
+.service-container .heading1{
+    text-align: center;
+}
+

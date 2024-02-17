@@ -11,7 +11,7 @@ function HeroPage() {
                 </div>
                 <div className="right-section">
                     <div className="content">
-                        <div className="main-heading">
+                        <div className=" main-heading heading1">
                             <div className="upper-section">
                                 <span>“A problem defined is a problem</span>
                             </div>
@@ -19,12 +19,12 @@ function HeroPage() {
                                 <span> half solved”</span>
                             </div>
                         </div>
-                        <div className="overview-section">
+                        <div className="overview-section normal-text-style">
                             We are here to help you reduce the complexity of
                             your learnings and also makes it easier.
                         </div>
                     </div>
-                    <button className="btn">Learn more</button>
+                    <button className="btn btn-text-style">Learn more</button>
                 </div>
             </div>
         </>
