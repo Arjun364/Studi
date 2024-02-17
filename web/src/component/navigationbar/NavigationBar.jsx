@@ -1,6 +1,5 @@
 import React from 'react'
 import './NavStyle.css'
-import '../commonCss.css'
 import { FaHome } from "react-icons/fa";
 
 
