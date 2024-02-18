@@ -41,14 +41,29 @@
     
 }
 
+/*button-section____________________________________________ */
+
 .btn{
     width:12.313rem;
     height: 2.625rem;
     border-radius: 0.25rem;
     border:.1rem solid black;
     background-color: black;
+    transition: all .3s ease-in;
 
 }
+
+.btn:hover{
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+.btn:active{
+    background-color: rgb(96, 96, 96);
+    color: white;
+    border-color:rgb(96, 96, 96) ;
+}
+
 
 li{
     list-style: none;

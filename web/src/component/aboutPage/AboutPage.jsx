@@ -5,7 +5,7 @@ import overiewimg from '../../assets/img2.svg'
 function AboutPage() {
   return (
     <>
-    <div className="about-container">
+    <div className="about-container" id='about'>
         <span className="heading1">About
         <hr className='about-horzline' />
         </span>

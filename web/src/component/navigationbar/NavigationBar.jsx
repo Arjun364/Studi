@@ -12,10 +12,10 @@ function NavigationBar() {
                 </div>
                 <div className="middle-section">
                     <ul className="menu-list">
-                        <li><a className='navigation-Text-Style' href="">Home</a></li>
-                        <li><a className='navigation-Text-Style' href="">About</a></li>
-                        <li><a className='navigation-Text-Style' href="">Services</a></li>
-                        <li><a className='navigation-Text-Style' href="">contact us</a></li>
+                        <li><a className='navigation-Text-Style' href="#home">Home</a></li>
+                        <li><a className='navigation-Text-Style' href="#about">About</a></li>
+                        <li><a className='navigation-Text-Style' href="#service">Services</a></li>
+                        <li><a className='navigation-Text-Style' href="#contact">contact us</a></li>
                     </ul>
                 </div>
                 <div className="right-section">

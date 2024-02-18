@@ -4,7 +4,7 @@ import { FaChevronCircleRight,FaChevronCircleLeft } from "react-icons/fa";
 function ServicePage() {
     return (
         <>
-            <div className="service-container">
+            <div className="service-container" id='service'>
                 <div className="top-section">
                     <span className="heading1">Services</span>
                     <hr className="service-lineHoriz" />

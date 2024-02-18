@@ -5,7 +5,7 @@ import { FaEnvelope, FaInstagram , FaLinkedin } from "react-icons/fa";
 function ContactPage() {
   return (
     <>
-    <div className="contact-container">
+    <div className="contact-container" id='contact'>
         <div className="top-section">
             <span className="normal-text-style">Get in Touch</span>
             <span className="heading1">Contact us</span>
