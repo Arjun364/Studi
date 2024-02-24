@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './NavStyle.css'
 import { FaHome } from "react-icons/fa";
 
 
 function NavigationBar() {
+    const [menu,setMenu]=useState("home")
     return (
         <>
             <div className="nav-container">
@@ -12,10 +13,10 @@ function NavigationBar() {
                 </div>
                 <div className="middle-section">
                     <ul className="menu-list">
-                        <li><a className='navigation-Text-Style' href="#home">Home</a></li>
-                        <li><a className='navigation-Text-Style' href="#about">About</a></li>
-                        <li><a className='navigation-Text-Style' href="#service">Services</a></li>
-                        <li><a className='navigation-Text-Style' href="#contact">contact us</a></li>
+                        <li onClick={()=>{setMenu("home")}}><a className='navigation-Text-Style' href="#">Home{menu==="home"?<hr className='active'/>:<hr className='deactive'/>}</a></li>
+                        <li onClick={()=>{setMenu("about")}}><a className='navigation-Text-Style' href="#about">About{menu==="about"?<hr className='active'/>:<hr className='deactive'/>}</a></li>
+                        <li onClick={()=>{setMenu("services")}}><a className='navigation-Text-Style' href="#service">Services {menu==="services"?<hr className='active'/>:<hr className='deactive'/>}</a></li>
+                        <li onClick={()=>{setMenu("contact")}}><a className='navigation-Text-Style' href="#contact">contact us {menu==="contact"?<hr className='active'/>:<hr className='deactive'/>}</a></li>
                     </ul>
                 </div>
                 <div className="right-section">
