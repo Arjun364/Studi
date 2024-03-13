@@ -1,6 +1,6 @@
 import React from 'react'
 import './aboutpage.css'
-import overiewimg from '../../assets/img2.svg'
+import overiewimg from '../../../assets/img2.svg'
 
 function AboutPage() {
   return (

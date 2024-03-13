@@ -1,15 +1,25 @@
 import { useState } from 'react'
 import './component/commonCss.css'
 import './App.css'
-import { Scroll } from "react-scroll";
 import Home from './Pages/Home.jsx';
+import { BrowserRouter, Route,Routes } from 'react-router-dom';
+import Registration from './Pages/Registration.jsx';
+import Login from './Pages/Login.jsx';
+
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-    <Home/>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='registration' element={<Registration/>} />
+      <Route path='login' element={<Login/>} />
+    </Routes>
+    </BrowserRouter>
+    
     </>
 
   )

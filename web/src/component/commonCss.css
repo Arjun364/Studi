@@ -49,6 +49,7 @@
     border-radius: 0.25rem;
     border:.1rem solid black;
     background-color: black;
+    color: white;
     transition: all .3s ease-in;
 
 }

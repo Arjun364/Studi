@@ -1,6 +1,6 @@
 import React from 'react'
 import './heropage.css'
-import illustration1 from '../../assets/img1.svg'
+import illustration1 from '../../../assets/img1.svg'
 function HeroPage() {
     return (
         <>

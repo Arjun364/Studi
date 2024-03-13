@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import './NavStyle.css'
-import { FaHome } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom'
+
 
 
 function NavigationBar() {
     const [menu,setMenu]=useState("home")
+    const navigate =useNavigate()
+    const menulist ='true'
+
     return (
         <>
             <div className="nav-container">
@@ -20,7 +24,8 @@ function NavigationBar() {
                     </ul>
                 </div>
                 <div className="right-section">
-                    <button className="btn btn-text-style">Get Started </button>
+
+                    <button className="btn btn-text-style" onClick={()=>{navigate('registration')}}>Get Started </button>
                     {/* icon - Home */}
                     {/* <FaHome className='icon'/> */}
                 </div>
