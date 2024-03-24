@@ -26,7 +26,7 @@ function AboutPage() {
                     </p>
                 </div>
                 <div className="right-section">
-                    <img className="overview-img" src={overiewimg} alt="" srcset="" />
+                    <img className="overview-img" src={overiewimg} alt=""  />
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ function HeroPage() {
         <>
             <div className="hero-section" id='home'>
                 <div className="left-section">
-                    <img src={illustration1} alt="illustration ont loading " srcset="" />
+                    <img src={illustration1} alt="illustration ont loading "  />
 
                 </div>
                 <div className="right-section">

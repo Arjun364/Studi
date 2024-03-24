@@ -90,3 +90,16 @@
     position: relative;
     right: 3rem;
 }
+
+.errorMsg{
+    width: 20.131rem;
+    height: 2rem;
+    background-color: rgb(255, 56, 56);
+    color: white;
+    border: .1rem solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .4rem;
+    
+}

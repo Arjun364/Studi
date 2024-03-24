@@ -14,7 +14,7 @@ const NavBarReg = ({islogin}) => {
         <span className="logo">STUDI</span>
         </div>
         <div className="right-container">
-            <button className='btn btn-text-style' onClick={()=>{islogin?navigate('/login'):navigate('/registration')}}> {islogin? 'login' :'Sign Up'}</button>
+            <button className='btn btn-text-style' onClick={()=>{islogin?navigate('/login'):navigate('/registration')}}> {islogin? 'login' :'register'}</button>
             <img src={Home_icon} style={{cursor:"pointer"}} alt="Home" id='Home-icon' onClick={()=>{navigate('/')}}/>
         </div>
     </div>
