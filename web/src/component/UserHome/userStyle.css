@@ -13,6 +13,10 @@
     
 }
 
+.hero-section1{
+    display: flex;
+}
+
 /* left-section------------------------------------- */
 
 .user-nav .left-section {
@@ -151,6 +155,18 @@
     /* background-color: black; */
     
 }
+
+/* viewport-section ---------------------------------------- */
+.viewport-container{
+    width: 100vw;
+    height: 90vh;
+    background-color: rgb(222, 222, 222);
+}
+
+
+/* home-section */
+
+
 
 
 
