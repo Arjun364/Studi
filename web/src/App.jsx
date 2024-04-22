@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import './component/commonCss.css'
 import './App.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProfileCreation from './component/Signup&Signin/ProfileCreation/ProfileCreation.jsx';
 import Home from './Pages/Home.jsx';
-import { BrowserRouter, Route,Routes } from 'react-router-dom';
-import Registration from './Pages/Registration.jsx';
 import Login from './Pages/Login.jsx';
+import Registration from './Pages/Registration.jsx';
+import UserPage from './Pages/UserPage.jsx';
 
 
 function App() {
@@ -12,14 +14,17 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='registration' element={<Registration/>} />
-      <Route path='login' element={<Login/>} />
-    </Routes>
-    </BrowserRouter>
-    
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/registration' element={<Registration />}>
+            <Route path='profile-creation' element={<ProfileCreation />} />
+          </Route>
+          <Route path='login' element={<Login />} />
+          <Route path='userpage' element={<UserPage />}/>
+        </Routes>
+      </BrowserRouter>
+
     </>
 
   )

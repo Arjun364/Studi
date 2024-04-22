@@ -1,0 +1,169 @@
+.Prof-creation-container{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    
+}
+.Prof-creation-container .context-container{
+    width: 80%;
+    height: 80vh;
+    /* background-color: antiquewhite; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.Prof-creation-container .context-container .top-section{
+    width: 80%;
+    height: 3rem;
+    display: flex;
+    align-items:center;
+    justify-content: right;
+    
+}
+
+.Prof-creation-container .context-container .middle-section{
+    width: 80%;
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+    
+    
+}
+.Prof-creation-container .context-container .middle-section .right-section{
+    display: flex;
+    align-items:center;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    gap: 2rem;
+    
+    
+}
+
+.Prof-creation-container .context-container .middle-section .right-section h1{
+    position: relative;
+    right: 2.5rem;
+    font-weight: 500;
+}
+.Prof-creation-container .context-container .middle-section .roles{
+    display: flex;
+    gap: 1rem;
+    
+    
+}
+.Prof-creation-container .context-container .middle-section .roles .box-active{
+    width:8rem;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    border: .2rem solid orangered;
+
+    
+}
+.Prof-creation-container .context-container .middle-section .roles .box-deactive{
+    width:8rem;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    border: .2rem solid rgb(134, 134, 134);
+
+    
+}
+
+.loadingPanel{
+    width: 60rem;
+    height: .5rem;
+    border-radius: .4rem;
+    background-color: rgb(154, 154, 154);
+
+}
+.loader{
+    width: 10rem;
+    height: .5rem;
+    border-radius: .4rem;
+    background-color: rgb(255, 115, 15);
+    position: relative;
+    top: .49rem;
+
+}
+
+.context-container .img1{
+    width: 30rem;
+}
+
+hr{
+    border: none;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.active{
+    color: orangered;
+}
+
+.radio-btn{
+    accent-color: orangered;
+}
+ .Prof-creation-container label{
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+ }
+
+ form  {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: .3rem;
+ }
+ form  input{
+    width: 17rem;
+    height: 2.4rem;
+    padding-left: .3rem;
+    border-radius: .3rem;
+    border: .1rem solid black;
+    font-weight: 500;
+    font-size: 1rem;
+
+ }
+ form  button{
+    width: 17rem;
+    height: 2.4rem;
+    border-radius: .3rem;
+    border: .1rem solid orangered;
+    background-color: orangered;
+    color: white;
+    font-weight: 500;
+    font-size: 1.2rem;
+    
+}
+
+.errMsg{
+    width: 17rem;
+    height: 2.4rem;
+    background-color: red;
+    border-radius: .3rem;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+
+
+
+

@@ -1,23 +1,30 @@
 import React, { useState } from 'react'
 import './signup.css'
+import { useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/SignUpImg-1.svg'
 import google_icon from '../../../assets/google-icon.svg'
-import { createUserWithEmailAndPassword, sendEmailVerification,signOut,GoogleAuthProvider, signInWithPopup  } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../Config/Firebase'
+import { db } from '../../../Config/Firebase'
+import { getDocs, collection, addDoc, query, where } from 'firebase/firestore'
 
-const SignUp = () => {
+const SignUp = ({ onSignupComplete }) => {
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
   const [confirmPass, setconfirmPass] = useState("")
-  const [error,setError]=useState("")
-  const [error1,setError1]=useState("")
+  const [error, setError] = useState("")
+  const [error1, setError1] = useState("")
   const [loading, setLoading] = useState(true)
 
+  const navigate = useNavigate()
 
-  const SignUp = async () => {  
+  const userCollectionRef = collection(db, "Users")
+
+
+  const SignUp = async () => {
     if (!email.includes('@') || !email.includes('.')) {
       setError1("Invalid email format.")
-      
+
       return
     }
 
@@ -30,6 +37,10 @@ const SignUp = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, pass)
       sendEmailVerification(auth.currentUser)
+      addDoc(userCollectionRef, {
+        emailID: email,
+
+      })
       // for sign out the user 
       // signOut(auth)
 
@@ -38,32 +49,51 @@ const SignUp = () => {
       setPass("")
       setconfirmPass("")
       setError("")
+
+      navigate('/registration/profile-creation');
+
+      // Call the callback to indicate signup completion
+      onSignupComplete();
     } catch (err) {
       console.log(err)
-      if (err.code=="auth/email-already-in-use") {
+      if (err.code == "auth/email-already-in-use") {
         setError("Email taken,try another")
       }
-      if (err.code=="auth/missing-password") {
+      if (err.code == "auth/missing-password") {
         setError("Password is required")
       }
-      
-    } finally{
+
+    } finally {
       setLoading(false) //stop
     }
 
   }
 
   console.log(auth?.currentUser)
- 
-  const handleSignInWithGoogle = async()=>{
+
+  const handleSignInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
 
-    try{
-      const result = await signInWithPopup(auth,provider)
-      const user=result.user
+    try {
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
       console.log(user)
 
-    }catch(err){
+      // Check if the user exists
+      const userSnapshot = await getDocs(query(collection(db, "Users"), where("emailID", "==", user.email)));
+
+      if (userSnapshot.empty) {
+        // If the user doesn't exist in the "Users" collection, add them
+        await addDoc(collection(db, "Users"), {
+          emailID: user.email,
+          // You can add additional user data here if needed
+        });
+      }
+
+      onSignupComplete();
+      navigate('/registration/profile-creation');
+
+    } catch (err) {
       console.error(err)
     }
   }
@@ -76,22 +106,24 @@ const SignUp = () => {
           <div className="form">
             <h1 className="title">Registration</h1>
             <div className="txt-boxs">
-              <input type="text" name="email" value={email} id="email" className='txt-box-style' placeholder='Email' onChange={(e) =>{ 
+              <input type="text" name="email" value={email} id="email" className='txt-box-style' placeholder='Email' onChange={(e) => {
                 setEmail(e.target.value)
-                setError1("")}
-                } required/>
-              {error1?<span className="errorMsg">{error1}</span>:""}
+                setError1("")
+              }
+              } required />
+              {error1 ? <span className="errorMsg">{error1}</span> : ""}
               <input type="password" name="pass" value={pass} id="pass" className='txt-box-style' placeholder='Password' onChange={(e) => {
                 setPass(e.target.value)
                 setError("")
               }
-            } required/>
+              } required />
               <input type="text" name="confirmpass" value={confirmPass}
-                id="confrimpass" className='txt-box-style' placeholder='Confirm password' onChange={(e) => {setconfirmPass(e.target.value)
-                setError("")
+                id="confrimpass" className='txt-box-style' placeholder='Confirm password' onChange={(e) => {
+                  setconfirmPass(e.target.value)
+                  setError("")
                 }
-                } required/>
-                {error?<span className="errorMsg">{error}</span>:""}
+                } required />
+              {error ? <span className="errorMsg">{error}</span> : ""}
               <button className='btn btn-text-style' onClick={SignUp}>Sign Up</button>
             </div>
             <div className="Other-options">
