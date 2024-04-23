@@ -1,3 +1,7 @@
+/* userpage---------------------------------------------- */
+
+
+
 /* user-navigation-------------------------------------- */
 
 .user-nav{
@@ -100,6 +104,7 @@
     justify-content:center ;
     /* padding-top: 2rem; */
     font-family: var( --poppins);
+    z-index: 90;
     
 }
 .siderbar-container .menu-list1{
@@ -161,10 +166,253 @@
     width: 100vw;
     height: 90vh;
     background-color: rgb(222, 222, 222);
+    padding: 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* its is to make the viewport a scrollable div  */
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: inset 2px 2px 1rem rgba(0, 0, 0, 0.368);
+    border-radius: .75rem;
+
+
 }
 
 
-/* home-section */
+/* home-section--------------------------------------------- */
+
+/* MyOverView----------------------------------------------- */
+
+.myoverview-container{
+    width:71.998rem ;
+    height: 21.063rem;
+    background-color: white;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    color: black;
+    gap: .1rem;
+    box-shadow: 2px 3px 1rem rgba(0, 0, 0, 0.368);
+    padding: 1.5rem 0rem;
+}
+
+.myoverview-container .top-section .title{
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-left: 2rem;
+    
+    
+}
+
+.line{
+    background-color: #d5d5d5;
+    height: 1px;
+
+}
+
+.myoverview-container .top-section{
+    display: flex;
+    flex-direction: column;
+    width: 97%;
+
+  
+}
+
+.myoverview-container .bottom-section{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 97%;
+    height: 14.875rem;
+}
+.myoverview-container .bottom-section .left-section{
+    display: flex;
+    flex-direction: column;
+    width: 46.313rem;
+    height: 14.875rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1.813rem;
+
+}
+.myoverview-container .bottom-section .left-section .top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    gap: 30.5rem;
+
+}
+.myoverview-container .bottom-section .left-section .top .left{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .2rem;
+
+}
+.myoverview-container .bottom-section .left-section .top .right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #545454;
+    border: 1px solid #545454;
+    border-radius: .3rem;
+    padding: .3rem;
+
+
+}
+.myoverview-container .bottom-section .left-section .middle{
+    display: flex;
+    width: 43.45rem;
+    align-items: start;
+    justify-content: start;
+    font-size: 1.5rem;
+    font-weight: 500;
+
+
+}
+.myoverview-container .bottom-section .left-section .bottom{
+    display: flex;
+    align-items: center;
+    gap: 1.688rem;
+
+}
+.myoverview-container .bottom-section .left-section .bottom .days{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 4.813rem;
+    height: 4.813rem;
+    border: 1px solid black;
+    border-radius: 0.75rem;
+   
+
+}
+
+.myoverview-container .bottom-section .right-section{
+    width: 21.125rem;
+    height: 14.875rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+
+}
+
+.myoverview-container .active{
+    background-color: #545454;
+    color: white;
+}
+
+.myoverview-container .right-section .top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 19.688rem;
+    height: 6.313rem;
+    border: 1px solid #545454;
+    border-radius: .75rem;
+}
+.myoverview-container .right-section .top .right {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.838rem;
+    font-weight: 300;
+
+}
+.myoverview-container .right-section .top .right span{
+    font-size: 1.5rem;
+    font-weight: 500;
+
+}
+.myoverview-container .right-section .bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 19.688rem;
+    height: 6.313rem;
+    border: 1px solid #545454;
+    border-radius: .75rem;
+}
+.myoverview-container .right-section .bottom .right{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.838rem;
+    font-weight: 300;
+    
+}
+
+.myoverview-container .right-section .bottom .right span{
+    font-size: 1.5rem;
+    font-weight: 500;
+
+}
+
+
+/* Course-section-------------------------------------------- */
+
+/* studymaterial--------------------------------------------- */
+
+.studymaterial-container{
+    width:71.998rem ;
+    height: 38.125rem;
+    background-color: white;
+    color: black;
+    /* padding: 1rem; */
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 3px 1rem rgba(0, 0, 0, 0.368);
+    
+    
+    
+}
+.studymaterial-container .top-section{
+    width:61.998rem ;
+    padding-top:3rem ;
+
+    
+}
+
+.studymaterial-container .bottom-section{
+    height: 58.125rem;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 5rem;
+}
+
+/* semester-component---------------------------------------- */
+
+.semester-container{    
+    width: 19.938rem;
+    height: 12.438rem;
+
+}
+.semester-container .cover-section{    
+    width: 19.938rem;
+    height: 12.438rem;
+    border: 2px solid black;
+    border-radius: .75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.semester-container .subject-list{    
+    display: none;
+}
 
 
 

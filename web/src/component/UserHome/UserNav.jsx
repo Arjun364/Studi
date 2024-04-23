@@ -4,7 +4,7 @@ import bell_icon from '../../assets/bell-icon.svg'
 import profile_icon from '../../assets/profile-icon.svg'
 import set_icon from '../../assets/setting-icon.svg'
 
-const UserNav = () => {
+const UserNav = ({active}) => {
   return (
         <>
         <div className='user-nav'>
@@ -12,7 +12,7 @@ const UserNav = () => {
                 <h1>Studi</h1>
             </div>
             <div className="middle-section">
-                <span className="title-name">Home</span>
+                <span className="title-name">{active}</span>
             </div>
             <div className="right-section">
                 <div className="notificationbar">

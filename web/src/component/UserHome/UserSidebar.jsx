@@ -5,12 +5,12 @@ import Assignment_icon from '../../assets/assignment-icon.svg'
 import Event_icon from '../../assets/icon.svg'
 import Setting_icon from '../../assets/setting1-icon.svg'
 
-const UserSidebar = () => {
-  const [Active,SetActive]=useState("Home");
+const UserSidebar = ({active, onMenuChange}) => {
   const [pos,setPos]=useState("Home")
 
   const ActiveHandler =(menu)=>{
-    SetActive(menu)
+    onMenuChange(menu);
+
     switch(menu){
       case "Home":
         setPos('3.3rem');
@@ -24,7 +24,7 @@ const UserSidebar = () => {
       case "Event":
         setPos('12.9rem');
         break;
-      case "Setting":
+      case "Settings":
         setPos('16.2rem');
         break;
       default :
@@ -39,29 +39,29 @@ const UserSidebar = () => {
       <div className="menu-list1">
 
       <span className='activebar' style={{top:pos}}></span>
-      <div id='Home' className={Active === "Home" ?'lio activeMenu':'lio '} 
+      <div id='Home' className={active === "Home" ?'lio activeMenu':'lio '} 
       onClick={()=>{ActiveHandler("Home")}}>
-      <img className={Active === "Home"? 'img-active':''}  src={Home_icon} alt="" />
+      <img className={active === "Home"? 'img-active':''}  src={Home_icon} alt="" />
       Home</div>
 
-      <div id='Course' className={Active === "Course" ?'lio activeMenu':'lio '}
+      <div id='Course' className={active === "Course" ?'lio activeMenu':'lio '}
       onClick={()=>{ActiveHandler("Course")}}>
-      <img className={Active === "Course"? 'img-active':''} src={Syllabus_icon} alt="" />
+      <img className={active === "Course"? 'img-active':''} src={Syllabus_icon} alt="" />
       Course</div>
 
-      <div id='Assignment' className={Active === "Assignment" ?'lio activeMenu':'lio '}
+      <div id='Assignment' className={active === "Assignment" ?'lio activeMenu':'lio '}
       onClick={()=>{ActiveHandler("Assignment")}}>
-      <img className={Active === "Assignment"? 'img-active':''} src={Assignment_icon} alt="" />
+      <img className={active === "Assignment"? 'img-active':''} src={Assignment_icon} alt="" />
       Assignment</div>
       
-      <div id='Event' className={Active === "Event" ?'lio activeMenu':'lio '}
+      <div id='Event' className={active === "Event" ?'lio activeMenu':'lio '}
       onClick={()=>{ActiveHandler("Event")}}>
-      <img className={Active === "Event"? 'img-active':''} src={Event_icon} alt="" />
+      <img className={active === "Event"? 'img-active':''} src={Event_icon} alt="" />
       Event</div>
       
-      <div id='Setting' className={Active === "Setting" ?'lio activeMenu':'lio '}
-      onClick={()=>{ActiveHandler("Setting")}}>
-      <img className={Active === "Setting"? 'img-active':''} src={Setting_icon} alt="" />
+      <div id='Setting' className={active === "Settings" ?'lio activeMenu':'lio '}
+      onClick={()=>{ActiveHandler("Settings")}}>
+      <img className={active === "Settings"? 'img-active':''} src={Setting_icon} alt="" />
       Settings</div>
       </div>
     </div>

@@ -7,6 +7,7 @@ import Home from './Pages/Home.jsx';
 import Login from './Pages/Login.jsx';
 import Registration from './Pages/Registration.jsx';
 import UserPage from './Pages/UserPage.jsx';
+import Viewport from '../src/component/UserHome/UserViewport/Viewport.jsx'
 
 
 function App() {
@@ -21,7 +22,10 @@ function App() {
             <Route path='profile-creation' element={<ProfileCreation />} />
           </Route>
           <Route path='login' element={<Login />} />
-          <Route path='userpage' element={<UserPage />}/>
+          <Route path='userpage' element={<UserPage />}>
+            <Route index path=':viewport' element={<Viewport/>}>
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
 
