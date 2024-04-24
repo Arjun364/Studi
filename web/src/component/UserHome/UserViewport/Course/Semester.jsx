@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Semester = () => {
+
+const Semester = ({sem}) => {
+  const [selected,setSelected]=useState(false);
   return (
     <>
-    <div className="semester-container">
-        <div className="cover-section">
-            <h1 className="title">Semester 1</h1>
-        <div className="subject-list">
-
+        <div className="semester-container">
+          <div className="cover-section">
+            <h1 className="title">Semester {sem}</h1>
+          </div>
         </div>
-        </div>
-    </div>
     </>
-  )
+  );
 }
 
 export default Semester

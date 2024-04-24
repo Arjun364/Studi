@@ -15,7 +15,7 @@ const UserPage = () => {
     <UserNav active={active} />
     <div className="hero-section1">
     <UserSidebar active={active} onMenuChange={handleMenuChange}/>
-    <Viewport/>
+    <Viewport menuActive={active} />
     </div>
     </>
   )

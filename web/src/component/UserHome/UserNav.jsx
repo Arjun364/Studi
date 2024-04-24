@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './userStyle.css'
 import bell_icon from '../../assets/bell-icon.svg'
 import profile_icon from '../../assets/profile-icon.svg'

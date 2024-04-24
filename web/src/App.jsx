@@ -7,7 +7,7 @@ import Home from './Pages/Home.jsx';
 import Login from './Pages/Login.jsx';
 import Registration from './Pages/Registration.jsx';
 import UserPage from './Pages/UserPage.jsx';
-import Viewport from '../src/component/UserHome/UserViewport/Viewport.jsx'
+// import Viewport from '../src/component/UserHome/UserViewport/Viewport.jsx'
 
 
 function App() {
@@ -23,8 +23,11 @@ function App() {
           </Route>
           <Route path='login' element={<Login />} />
           <Route path='userpage' element={<UserPage />}>
-            <Route index path=':viewport' element={<Viewport/>}>
-            </Route>
+            <Route index path='home' element={<UserPage />}/>
+            <Route path='course' element={<UserPage />}/>
+            <Route path='assignment' element={<UserPage />}/>
+            <Route path='event' element={<UserPage />}/>
+            <Route path='settings' element={<UserPage />}/>
           </Route>
         </Routes>
       </BrowserRouter>
