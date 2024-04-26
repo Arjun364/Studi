@@ -7,6 +7,8 @@ import Home from './Pages/Home.jsx';
 import Login from './Pages/Login.jsx';
 import Registration from './Pages/Registration.jsx';
 import UserPage from './Pages/UserPage.jsx';
+import UserProvider from './Store/UserContext.jsx';
+import { AuthProvider } from './Store/AuthContext.jsx';
 // import Viewport from '../src/component/UserHome/UserViewport/Viewport.jsx'
 
 
@@ -15,6 +17,8 @@ function App() {
 
   return (
     <>
+    <AuthProvider>
+    <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -31,6 +35,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+    </UserProvider>
+    </AuthProvider>
 
     </>
 

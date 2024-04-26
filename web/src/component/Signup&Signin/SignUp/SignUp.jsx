@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './signup.css'
 import { useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/SignUpImg-1.svg'
@@ -6,7 +6,8 @@ import google_icon from '../../../assets/google-icon.svg'
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../Config/Firebase'
 import { db } from '../../../Config/Firebase'
-import { getDocs, collection, addDoc, query, where } from 'firebase/firestore'
+import { getDocs, collection, addDoc, query, where, setDoc,doc,} from 'firebase/firestore'
+import { UserContext } from '../../../Store/UserContext';
 
 const SignUp = ({ onSignupComplete }) => {
   const [email, setEmail] = useState("")
@@ -14,6 +15,10 @@ const SignUp = ({ onSignupComplete }) => {
   const [confirmPass, setconfirmPass] = useState("")
   const [error, setError] = useState("")
   const [error1, setError1] = useState("")
+  const [userUid,setUserUid]=useState()
+  const [userName,setUserName]=useState()
+  const {user,setUser}=useContext(UserContext)
+  
   const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate()
@@ -37,10 +42,18 @@ const SignUp = ({ onSignupComplete }) => {
     try {
       await createUserWithEmailAndPassword(auth, email, pass)
       sendEmailVerification(auth.currentUser)
-      addDoc(userCollectionRef, {
-        emailID: email,
-
+      setUserUid(auth.currentUser.uid)
+      setUserName(auth.currentUser.displayName)
+      
+      const UserRef = await addDoc(collection(db,"Users"),{
+        emailID:email,
+        // userUid:UserRef.id,
       })
+
+      setUser(UserRef)
+
+      console.log("Document written with ID: ", UserRef.id);
+
       // for sign out the user 
       // signOut(auth)
 
@@ -69,7 +82,7 @@ const SignUp = ({ onSignupComplete }) => {
 
   }
 
-  console.log(auth?.currentUser)
+  console.log(auth?.currentUser) 
 
   const handleSignInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();

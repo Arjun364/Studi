@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './signin.css';
+import { useNavigate } from 'react-router-dom';
 import google_icon from '../../../assets/google-icon.svg';
 import { auth } from '../../../Config/Firebase'
 import { signInWithEmailAndPassword,GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -11,6 +12,9 @@ const SignIn = () => {
     const [pass,SetPass]= useState("");
     const [error,setError]=useState("")
     const [error1,setError1]=useState("")
+
+    const navigate = useNavigate()
+
 
     const handleButtonClick = (role) => {
         setIsStudent(role);
@@ -29,6 +33,7 @@ const SignIn = () => {
             await signInWithEmailAndPassword(auth,email,pass)
             SetEmail("")
             SetPass("")
+            navigate('/userpage');
 
         } catch(err){
             if(err.code= "auth/invalid-credential"){
@@ -47,6 +52,7 @@ const SignIn = () => {
           const result = await signInWithPopup(auth,provider)
           const user=result.user
           console.log(user)
+          navigate('/userpage');
     
         }catch(err){
           console.error(err)

@@ -43,10 +43,12 @@
 /* right-section--------------------------------------- */
 
 .user-nav .right-section {
-    width: 17.688rem;
+    width: 18.688rem;
     display: flex;
     align-items: center;
+    justify-content: right;
     gap: 1.25rem;
+    
 }
 .user-nav .right-section .notificationbar{
     width: 2.813rem;
@@ -59,18 +61,121 @@
     cursor: pointer;
 }
 .user-nav .right-section .profile-details {
-    width: 13.563rem;
+    width: 14.563rem;
     height: 2.813rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     border: 0.125rem solid black;
     border-radius: 0.75rem;
     padding: 0 .3rem;
     cursor: pointer;
+    transition: width 200ms ease-in;
+    transition: gap 400ms ease-in;
     
 }
+.user-nav .right-section .profile-details .text-container {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: display 2s ease-in;
+    
+    
+}
+
+
+
+
+
+/* Profile pop section------------------------------------- */
+
+
+
+.ProfilePop-container{
+    width: 21.438rem;
+    height:29.813rem;
+    border: 2px solid;
+    background-color:white ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+     border-radius:0.5rem ;
+     color: black;
+     position: absolute;
+     /* top:0; */
+     right: 3.4rem;
+
+}
+
+.ProfilePop-container .second{
+    text-align: center;
+    
+}
+
+.ProfilePop-container .middle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+
+.ProfilePop-container .bottom .upper{
+      width: 16.875rem;
+      height:2.563rem ;
+      border-radius:0.75rem ;
+      background-color: #545454;
+      border: 2px ;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-bottom: 0.625rem;
+      margin-top: 0.625rem;
+      font-size:1.25rem ;
+      font-weight: 400;
+     
+}
+
+.ProfilePop-container .bottom .lower{
+    width: 16.875rem;
+    height:2.563rem ;
+    border-radius:0.75rem ;
+    border: 2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:1.25rem ;
+    color: #545454;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ProfilePop-container .second .tittle{
+    font-size:1.5rem ;
+    font-weight: 500;
+}
+
+.ProfilePop-container .second .email{
+    font-size: 0.813rem;
+    font-weight: 300;
+}
+
+.ProfilePop-container .middle .year{
+    font-size:1.25rem ;
+    font-weight: 300;
+    margin-top: 0.625rem;
+}
+
+.ProfilePop-container .middle .dept{
+    font-size:0.813rem ;
+    font-weight: bold;
+}
+
+
+
 .user-nav .right-section .leftside{
     display: flex;
     gap: .3rem;
