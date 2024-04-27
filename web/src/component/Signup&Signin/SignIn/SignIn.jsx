@@ -40,7 +40,7 @@ const SignIn = () => {
         try{
             const result = await signInWithEmailAndPassword(auth,email,pass)
             const user = result.user
-            console.log(user.email)
+            // console.log(user.email)
 
             const userSnapshot = await getDocs(query(collection(db,"Users"),where("emailID","==",user.email)))
 
@@ -48,7 +48,7 @@ const SignIn = () => {
                 userSnapshot.forEach((doc)=>{
                     const userID=doc.id;
 
-                    console.log("User ID:", userID);
+                    // console.log("User ID:", userID);
 
                     localStorage.setItem("user",JSON.stringify(userID));
 
@@ -78,6 +78,22 @@ const SignIn = () => {
         try{
           const result = await signInWithPopup(auth,provider)
           const user=result.user
+
+          const userSnapshot = await getDocs(query(collection(db,"Users"),where("emailID","==",user.email)))
+          
+          if(!userSnapshot.empty){
+            userSnapshot.forEach((doc)=>{
+                const userID=doc.id;
+
+                // console.log("User ID:", userID);
+
+                localStorage.setItem("user",JSON.stringify(userID));
+
+            })
+        }else{
+            console.log("No user found with email:", user.email);
+        }
+
           console.log(user)
           navigate('/userpage');
     

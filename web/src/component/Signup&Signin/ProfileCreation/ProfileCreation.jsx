@@ -8,9 +8,9 @@ import student_gray from '../../../assets/student-icon-gray.svg';
 import staff_orange from '../../../assets/staff-icon-orange.svg';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../Config/Firebase';
-import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { UserContext } from '../../../Store/UserContext';
-// import { setUserId } from 'firebase/analytics';
+import defaultImg from "../../../assets/profile-big-icon.svg"
 
 
 const ProfileCreation = ({}) => {
@@ -26,7 +26,7 @@ const ProfileCreation = ({}) => {
   const [gender, setGender] = useState("");
   const [start, setStart] = useState(0);
   const [finish, setFinish] = useState(0);
-  const [profilImg, setprofileImg] = useState("");
+  const [profileImg, setprofileImg] = useState("");
 
   // console.log(firstName)
   // console.log(lastName)
@@ -34,6 +34,8 @@ const ProfileCreation = ({}) => {
   // console.log(gender)
   // console.log(start)
   // console.log(finish)
+
+  // const [userImg,setUserImg]=useState("")
 
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
@@ -61,8 +63,6 @@ const ProfileCreation = ({}) => {
 
       setSelctedRole(true)
 
-      
-
     } catch (err) {
       // console.error(err)
     }
@@ -87,10 +87,25 @@ const ProfileCreation = ({}) => {
       setUser(items)
     }
     const handlingprofiledetails= async ()=>{
-      setprofileImg()
+      try{
+        if(userId){
+          const userDocRef = doc(db, "Users", userId);
+          const docSnapShot = await getDoc(userDocRef);
+
+          if(docSnapShot.exists()){
+            const userData = docSnapShot.data();
+            setprofileImg(userData.photoUrl)
+            console.log(userData.photoUrl)
+          }
+
+        }
+      }catch(err){
+        console.log("The userId cannot retrive",userId);
+      }
+
     }
     handlingprofiledetails()
-  },[])
+  },[userId])
 
   const handlingSubmit= async()=>{
     
@@ -123,9 +138,7 @@ const ProfileCreation = ({}) => {
             <div className="profile-details-container">
               <div className="top-section">
                 <div className="left-section">
-                  <div className="img-container">
-                    <img src="" alt="profile-image" />
-                  </div>
+                    <img src={profileImg || defaultImg} alt="profile-image" />
                 </div>
                 <div className="right-section">
                   <div className="name-section">

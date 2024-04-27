@@ -7,6 +7,7 @@ import {signOut} from 'firebase/auth'
 import { auth } from '../../Config/Firebase'
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../Config/Firebase'
+import defaultImg from "../../assets/profile-big-icon.svg"
 
 
 const ProfilePop = ({select}) => {
@@ -19,6 +20,7 @@ const ProfilePop = ({select}) => {
   const [startDate, setStartDate] = useState(0);
   const [FinishDate, setFinishDate] = useState(0);
   const [year,setYear] = useState()
+  const [userImg,setUserImg] = useState("")
 
   const userId = user ? user : null;
 
@@ -44,6 +46,9 @@ const ProfilePop = ({select}) => {
             setDep(userData.dep || 'Department Specilaised');
             setStartDate(userData.acadamicStart || null)
             setFinishDate(userData.acadamicFinish || null)
+            setUserImg(userData.photoUrl)
+
+
           } else {
             setFirstName('First Name');
             setLastName('Last Name');
@@ -54,8 +59,8 @@ const ProfilePop = ({select}) => {
           if(startDate && FinishDate){
             const today= new Date()
             const presentyear= today.getFullYear()
-            console.log(presentyear)
-            setYear(presentyear-startDate + 1)
+            // console.log(presentyear)
+            setYear(presentyear - startDate + 1);
             console.log(year)
           }else{
             console.log("The year is not defined",startDate,FinishDate);
@@ -91,7 +96,7 @@ const ProfilePop = ({select}) => {
     <>
       <div className="ProfilePop-container" style={select?{display:"flex"}:{display:"none"}}>
       <div className="top">
-        <img src={profileIcon} alt="Profile Icon" />
+        <img src={userImg || defaultImg}  alt="Profile Icon" />
       </div>
       <div className="second">
         <p className="tittle">{firstName} {lastName}</p>

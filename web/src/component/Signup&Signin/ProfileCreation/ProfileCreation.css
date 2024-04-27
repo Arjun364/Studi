@@ -62,6 +62,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .left-section img{
+    width: 18rem;
 }
 .Prof-creation-container .context-container .profile-details-container .top-section .right-section{
     width: 30rem;

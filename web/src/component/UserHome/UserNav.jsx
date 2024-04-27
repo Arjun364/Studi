@@ -20,7 +20,7 @@ const UserNav = ({ active,onSelectChange,select}) => {
   
   
   const userId = user ? user : null;
-  console.log(user)
+  // console.log(user)
 
   // const userId=""
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './signup.css'
 import { useNavigate } from 'react-router-dom';
 import img1 from '../../../assets/SignUpImg-1.svg'
@@ -9,6 +9,7 @@ import { db } from '../../../Config/Firebase'
 import { getDocs, collection, addDoc, query, where, setDoc,doc, updateDoc,} from 'firebase/firestore'
 import { UserContext } from '../../../Store/UserContext';
 import { update } from 'firebase/database';
+import userImg from "../../../assets/profile-big-icon.svg"
 
 const SignUp = ({ onSignupComplete }) => {
   const [email, setEmail] = useState("")
@@ -16,7 +17,6 @@ const SignUp = ({ onSignupComplete }) => {
   const [confirmPass, setconfirmPass] = useState("")
   const [error, setError] = useState("")
   const [error1, setError1] = useState("")
-  // const [userUid,setUserUid]=useState()
   // const [userName,setUserName]=useState()
   const { user, setUser } = useContext(UserContext);
 
@@ -46,6 +46,7 @@ const SignUp = ({ onSignupComplete }) => {
       const credential = await createUserWithEmailAndPassword(auth, email, pass)
 
       const currentUser = credential.user;
+      // console.log(currentUser);
 
       sendEmailVerification(currentUser)
       // setUserUid(currentUser.uid)
@@ -55,6 +56,7 @@ const SignUp = ({ onSignupComplete }) => {
       const UserRef = await addDoc(userCollectionRef,{
         emailID:currentUser.email,
         userName:currentUser.displayName?currentUser.displayName:"profile name",
+        photoUrl:currentUser.photoURL,
         // userId:userUid
       })
       
@@ -63,7 +65,7 @@ const SignUp = ({ onSignupComplete }) => {
         localStorage.setItem("user",JSON.stringify(UserRef.id));
       }
 
-      // console.log("Document written with ID: ", UserRef);
+      console.log("Document written with ID: ", UserRef);
 
       // for sign out the user 
       // signOut(auth)
@@ -97,40 +99,54 @@ const SignUp = ({ onSignupComplete }) => {
 
 
 
-  const userId = user ? user.id : null;
+  // const userId = user ? user.id : null;
 
   const handleSignInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
 
     try {
-      const result = await signInWithPopup(auth, provider)
-      const user = result.user
-  
-      // Check if the user exists in the "Users" collection
-      const userSnapshot = await getDocs(query(collection(db, "Users"), where("emailID", "==", user.email)));
-  
-      if (!userSnapshot.empty) {
-        // If the user exists, navigate to the userpage
-        navigate("/userpage");
-      } else {
-        // If the user does not exist, proceed with sign-up
-        const userRef = await addDoc(collection(db, "Users"), {
-          emailID: user.email,
-          userName: user.displayName ? user.displayName : "profile name",
-          // You can add additional user data here if needed
-        });
-  
-        if(userRef){
-          setUser(userRef)
-          localStorage.setItem("user",JSON.stringify(userRef.id));
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Check if the user exists in the "Users" collection
+        const userSnapshot = await getDocs(query(collection(db, "Users"), where("emailID", "==", user.email)));
+
+        if (!userSnapshot.empty) {
+            // If the user exists, update their data
+            const userData = userSnapshot.docs[0].data();
+            const userId = userSnapshot.docs[0].id;
+
+            await updateDoc(doc(db, "Users", userId), {
+                userName: user.displayName || "profile name",
+                photoUrl: user.photoURL,
+            });
+
+            setUser(userData);
+            localStorage.setItem("user", JSON.stringify(userId));
+            navigate("/userpage");
+        } else {
+            // If the user does not exist, add them to the collection
+            const newUserRef = await addDoc(collection(db, "Users"), {
+                emailID: user.email,
+                userName: user.displayName || "profile name",
+                photoUrl: user.photoURL,
+            });
+
+            setUser(newUserRef);
+            localStorage.setItem("user", JSON.stringify(newUserRef.id));
+            navigate('/registration/profile-creation');
+            onSignupComplete();
         }
-        navigate('/registration/profile-creation');
-        onSignupComplete();
-      }
     } catch (err) {
-      console.error(err);
+        console.error(err);
     }
-  }
+};
+
+
+  useEffect(()=>{
+
+
+  })
 
   return (
     <>

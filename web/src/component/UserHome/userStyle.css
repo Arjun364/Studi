@@ -84,10 +84,6 @@
     
 }
 
-
-
-
-
 /* Profile pop section------------------------------------- */
 
 
@@ -106,7 +102,12 @@
      position: absolute;
      /* top:0; */
      right: 3.4rem;
+     z-index: 99;
 
+}
+.ProfilePop-container .top img{
+    width: 11rem;
+    border-radius: 100rem;
 }
 
 .ProfilePop-container .second{
