@@ -6,8 +6,9 @@ import google_icon from '../../../assets/google-icon.svg'
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { auth } from '../../../Config/Firebase'
 import { db } from '../../../Config/Firebase'
-import { getDocs, collection, addDoc, query, where, setDoc,doc,} from 'firebase/firestore'
+import { getDocs, collection, addDoc, query, where, setDoc,doc, updateDoc,} from 'firebase/firestore'
 import { UserContext } from '../../../Store/UserContext';
+import { update } from 'firebase/database';
 
 const SignUp = ({ onSignupComplete }) => {
   const [email, setEmail] = useState("")
@@ -15,15 +16,17 @@ const SignUp = ({ onSignupComplete }) => {
   const [confirmPass, setconfirmPass] = useState("")
   const [error, setError] = useState("")
   const [error1, setError1] = useState("")
-  const [userUid,setUserUid]=useState()
-  const [userName,setUserName]=useState()
-  const {user,setUser}=useContext(UserContext)
+  // const [userUid,setUserUid]=useState()
+  // const [userName,setUserName]=useState()
+  const { user, setUser } = useContext(UserContext);
+
   
   const [loading, setLoading] = useState(true)
 
   const navigate = useNavigate()
 
   const userCollectionRef = collection(db, "Users")
+  // const currentUser =auth.currentUser
 
 
   const SignUp = async () => {
@@ -40,19 +43,27 @@ const SignUp = ({ onSignupComplete }) => {
 
 
     try {
-      await createUserWithEmailAndPassword(auth, email, pass)
-      sendEmailVerification(auth.currentUser)
-      setUserUid(auth.currentUser.uid)
-      setUserName(auth.currentUser.displayName)
+      const credential = await createUserWithEmailAndPassword(auth, email, pass)
+
+      const currentUser = credential.user;
+
+      sendEmailVerification(currentUser)
+      // setUserUid(currentUser.uid)
+      // setUserName(currentUser.displayName)
       
-      const UserRef = await addDoc(collection(db,"Users"),{
-        emailID:email,
-        // userUid:UserRef.id,
+      
+      const UserRef = await addDoc(userCollectionRef,{
+        emailID:currentUser.email,
+        userName:currentUser.displayName?currentUser.displayName:"profile name",
+        // userId:userUid
       })
+      
+      if(UserRef){
+        setUser(UserRef)
+        localStorage.setItem("user",JSON.stringify(UserRef.id));
+      }
 
-      setUser(UserRef)
-
-      console.log("Document written with ID: ", UserRef.id);
+      // console.log("Document written with ID: ", UserRef);
 
       // for sign out the user 
       // signOut(auth)
@@ -82,7 +93,11 @@ const SignUp = ({ onSignupComplete }) => {
 
   }
 
-  console.log(auth?.currentUser) 
+  // console.log(auth?.currentUser) 
+
+
+
+  const userId = user ? user.id : null;
 
   const handleSignInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
@@ -90,24 +105,30 @@ const SignUp = ({ onSignupComplete }) => {
     try {
       const result = await signInWithPopup(auth, provider)
       const user = result.user
-      console.log(user)
-
-      // Check if the user exists
+  
+      // Check if the user exists in the "Users" collection
       const userSnapshot = await getDocs(query(collection(db, "Users"), where("emailID", "==", user.email)));
-
-      if (userSnapshot.empty) {
-        // If the user doesn't exist in the "Users" collection, add them
-        await addDoc(collection(db, "Users"), {
+  
+      if (!userSnapshot.empty) {
+        // If the user exists, navigate to the userpage
+        navigate("/userpage");
+      } else {
+        // If the user does not exist, proceed with sign-up
+        const userRef = await addDoc(collection(db, "Users"), {
           emailID: user.email,
+          userName: user.displayName ? user.displayName : "profile name",
           // You can add additional user data here if needed
         });
+  
+        if(userRef){
+          setUser(userRef)
+          localStorage.setItem("user",JSON.stringify(userRef.id));
+        }
+        navigate('/registration/profile-creation');
+        onSignupComplete();
       }
-
-      onSignupComplete();
-      navigate('/registration/profile-creation');
-
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 

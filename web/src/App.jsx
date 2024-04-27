@@ -17,13 +17,13 @@ function App() {
 
   return (
     <>
-    <AuthProvider>
     <UserProvider>
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/registration' element={<Registration />}>
-            <Route path='profile-creation' element={<ProfileCreation />} />
+            <Route path='profile-creation' element={<ProfileCreation/>} />
           </Route>
           <Route path='login' element={<Login />} />
           <Route path='userpage' element={<UserPage />}>
@@ -35,8 +35,8 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </UserProvider>
     </AuthProvider>
+    </UserProvider>
 
     </>
 

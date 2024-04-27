@@ -24,6 +24,159 @@
     justify-content: right;
     
 }
+.Prof-creation-container .context-container .profile-details-container{
+    width:67.5rem;
+    height: 30.313rem;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+    color: black;
+    font-size: 1.3rem;
+
+}
+.Prof-creation-container .context-container .profile-details-container input{
+    cursor: pointer;
+
+}
+
+.Prof-creation-container .context-container .profile-details-container .top-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 67.5rem;
+    height: 20rem;
+    gap: 4rem;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .left-section{
+    width: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .left-section{
+    width: 18rem;
+    background-color: rgb(235, 129, 129);
+    border-radius: 10rem;
+    height: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section{
+    width: 30rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .name-section{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .name-section input{
+    width: 14.3rem;
+    height: 2rem;
+    border: 2px solid black;
+    border-radius: .2rem;
+    padding: 0rem .3rem;
+    font-size: 1rem;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .name-section .firstName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .name-section .lastName{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .dept-section{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .dept-section select{
+    height: 2.5rem;
+    border: 2px solid black;
+    border-radius: .2rem;
+    padding: 0rem .3rem;
+    font-size: 1rem;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .dept-section option{
+    height: 2.5rem;
+    border: 2px solid black;
+    border-radius: .2rem;
+    padding: 0rem .3rem;
+    font-size: 1rem;
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .gender-section{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+    
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .gender-section input{
+    width: 1.3rem;
+    height: 1.3rem;
+    
+    
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .acadamic-section{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    gap: .5rem;
+    
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .acadamic-section .year{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: left;
+    gap: 1rem;
+   
+    
+}
+.Prof-creation-container .context-container .profile-details-container .top-section .right-section .acadamic-section .year input{
+    width: 5rem;
+    height: 2rem;
+    border: 2px solid black;
+    border-radius: .2rem;
+    padding: 0rem .3rem;
+    font-size: 1rem;
+    
+}
+.Prof-creation-container .context-container .profile-details-container .bottom-section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 3.8rem;
+    
+}
+.Prof-creation-container .context-container .profile-details-container .bottom-section button{
+    width: 10rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    background-color: rgb(255, 111, 0);
+    border: none;
+    border-radius: .3rem;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
 
 .Prof-creation-container .context-container .middle-section{
     width: 80%;

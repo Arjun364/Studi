@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './ProfileCreation.css';
 import img_1 from '../../../assets/Profile_Creation_img.svg';
 import cross from '../../../assets/cross.svg';
@@ -8,45 +8,110 @@ import student_gray from '../../../assets/student-icon-gray.svg';
 import staff_orange from '../../../assets/staff-icon-orange.svg';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../Config/Firebase';
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, updateDoc, doc } from 'firebase/firestore';
+import { UserContext } from '../../../Store/UserContext';
+// import { setUserId } from 'firebase/analytics';
 
-const ProfileCreation = () => {
+
+const ProfileCreation = ({}) => {
   const [selectedOption, setSelectedOption] = useState('student');
-  const [codeInput, setCodeInput] = useState('');
-  const [error,setError]=useState()
+  const [role, setRole] = useState("student");
+  const [selectedRole, setSelctedRole] = useState(false)
+
+
+  // the profile details usestates
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dep, setDep] = useState("");
+  const [gender, setGender] = useState("");
+  const [start, setStart] = useState(0);
+  const [finish, setFinish] = useState(0);
+  const [profilImg, setprofileImg] = useState("");
+
+  // console.log(firstName)
+  // console.log(lastName)
+  // console.log(dep)
+  // console.log(gender)
+  // console.log(start)
+  // console.log(finish)
+
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
+
+
+  const userId = user ? user : null;
 
   const handlingRole = async () => {
-    let collectionName = '';
-    if (selectedOption === 'student') {
-      collectionName = 'CandidateCodes';
-    } else {
-      collectionName = 'StaffCodes';
-    }
-    console.log(codeInput)
-    try{
-      const codesCollection = collection(db, collectionName);
-      const codeQuery = query(codesCollection, where('code', '==', codeInput));
-      const querySnapshot = await getDocs(codeQuery);
-      if (!querySnapshot.empty) {
-        console.log('Code found in the collection.');
-        setError("")
-        // Code exists, proceed with your logic
+
+    try {
+
+      if (selectedOption === "student") {
+        setRole("student")
+
       } else {
-        console.log('Code not found in the collection.');
-        setError("Invalid "+selectedOption+ " code")
-        // Code does not exist, handle accordingly (e.g., display error message)
+        setRole("staff")
       }
+
+      const userdata = doc(db, "Users", userId);
+      await updateDoc(userdata, {
+        role: role,
+        userID: user
+      })
+
+      setSelctedRole(true)
+
       
-    }catch(err){
-      console.log(err)
+
+    } catch (err) {
+      // console.error(err)
     }
-    finally{
+
+    try {
+
+
+    } catch (err) {
+      console.error(err)
+    }
+    finally {
       // setCodeInput(''); // Reset codeInput field after handling
     }
 
   };
-  
+
+  useEffect(()=>{
+
+    const items = JSON.parse(localStorage.getItem('user'));
+    if (items) {
+      // console.log(items);
+      setUser(items)
+    }
+    const handlingprofiledetails= async ()=>{
+      setprofileImg()
+    }
+    handlingprofiledetails()
+  },[])
+
+  const handlingSubmit= async()=>{
+    
+    try{
+      const userDetails = doc(db,"Users",userId);
+      await updateDoc(userDetails,{
+        firstName:firstName,
+        lastName:lastName,
+        dep:dep,
+        gender:gender,
+        acadamicStart:start,
+        acadamicFinish:finish,
+      })
+
+      navigate("/userpage")
+
+    }catch(err){
+      console.error(err);
+    }
+  }
+
   return (
     <>
       <div className="Prof-creation-container">
@@ -54,39 +119,92 @@ const ProfileCreation = () => {
           <div className="top-section">
             <img src={cross} alt="Exit" onClick={() => navigate('/')} />
           </div>
-          <div className="middle-section">
-            <div className="left-section">
-              <img className='img1' src={img_1} alt="image" />
-            </div>
-            <div className="right-section">
-              <h1 className="title">Choose Role</h1>
-              <div className="roles">
-                <div className="student box" onClick={() => setSelectedOption('student')}>
-                  <div className={selectedOption === 'student' ? 'box-active' : 'box-deactive'} >
-                    <img src={selectedOption === 'student' ? student : student_gray} alt="student" />
+          {selectedRole ?
+            <div className="profile-details-container">
+              <div className="top-section">
+                <div className="left-section">
+                  <div className="img-container">
+                    <img src="" alt="profile-image" />
                   </div>
-                  <label htmlFor="student" className={selectedOption === 'student' ? 'active' : ''} >
-                    <input type="radio" name="role" id="student" className='radio-btn' checked={selectedOption === 'student'} onChange={() => setSelectedOption('student')}/>
-                    Student
-                  </label>
                 </div>
-                <div className="staff box" onClick={() => setSelectedOption('staff')}>
-                  <div className={selectedOption === 'student' ? 'box-deactive' : 'box-active'}>
-                    <img src={selectedOption === 'student' ? staff : staff_orange} alt="staff" style={{ color: 'gray' }} />
+                <div className="right-section">
+                  <div className="name-section">
+                    <div className="firstName">
+                      First Name
+                      <input type="text" value={firstName} onChange={(e) => { setFirstName(e.target.value) }} />
+                    </div>
+                    <div className="lastName">
+                      Last Name
+                      <input type="text" value={lastName} onChange={(e) => { setLastName(e.target.value) }} />
+                    </div>
                   </div>
-                  <label htmlFor="staff" className={selectedOption === 'staff' ? 'active' : ''}>
-                    <input type="radio" name="role" id="staff" className='radio-btn' checked={selectedOption === 'staff'} onChange={() => setSelectedOption('staff')}/>
-                    Staff
-                  </label>
+                  <div className="dept-section">
+                    Department specialised.
+                    <select name="Department"  onChange={(e) => { setDep(e.target.value) }}>
+                      <option value={null}>Select an option</option>
+                      <option value="B.Voc Software Development">B.Voc Software Development</option>
+                      <option value="Coming soon.">Coming soon.</option>
+                      {/* Add more options here if needed */}
+                    </select>
+                  </div>
+                  <div className="gender-section">
+                    <label htmlFor="male">
+                      <input type="radio" name="gender" id="male" onChange={() => setGender("male")} />
+                      Male
+                    </label>
+                    <label htmlFor="female">
+                      <input type="radio" name="gender" id="female" onChange={() => setGender("female")} />
+                      Female
+                    </label>
+                  </div>
+                  <div className="acadamic-section">
+                    Enter your Acadamic section.
+                    <div className="year">
+                      <label htmlFor="start">
+                        Start at : <input type="number" max='4' id='start' onChange={(e) => { setStart(e.target.value) }} />
+                      </label>
+                      <label htmlFor="finish">
+                        Finish on : <input type="number" max="4" id='start' onChange={(e) => { setFinish(e.target.value) }} />
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <form className='input-Section'>
-                <input type="text" placeholder={selectedOption === 'student' ? 'Enter the Candidate code' : 'Enter the Staff code'} value={codeInput} onChange={(e) => setCodeInput(e.target.value)} />
-                {error?<span className='errMsg'>{error}</span>:<></>}
-                <button type="button" onClick={handlingRole}>Confirm</button>
-              </form>
-            </div>
-          </div>
+              <div className="bottom-section">
+                <button onClick={handlingSubmit}>Finish</button>
+              </div>
+            </div> :
+            <div className="middle-section">
+              <div className="left-section">
+                <img className='img1' src={img_1} alt="image" />
+              </div>
+              <div className="right-section">
+                <h1 className="title">Choose Role</h1>
+                <div className="roles">
+                  <div className="student box" onClick={() => setSelectedOption('student')}>
+                    <div className={selectedOption === 'student' ? 'box-active' : 'box-deactive'} >
+                      <img src={selectedOption === 'student' ? student : student_gray} alt="student" />
+                    </div>
+                    <label htmlFor="student" className={selectedOption === 'student' ? 'active' : ''} >
+                      <input type="radio" name="role" id="student" className='radio-btn' checked={selectedOption === 'student'} onChange={() => setSelectedOption('student')} />
+                      Student
+                    </label>
+                  </div>
+                  <div className="staff box" onClick={() => setSelectedOption('staff')}>
+                    <div className={selectedOption === 'student' ? 'box-deactive' : 'box-active'}>
+                      <img src={selectedOption === 'student' ? staff : staff_orange} alt="staff" style={{ color: 'gray' }} />
+                    </div>
+                    <label htmlFor="staff" className={selectedOption === 'staff' ? 'active' : ''}>
+                      <input type="radio" name="role" id="staff" className='radio-btn' checked={selectedOption === 'staff'} onChange={() => setSelectedOption('staff')} />
+                      Staff
+                    </label>
+                  </div>
+                </div>
+                <form className='input-Section'>
+                  <button type="button" onClick={handlingRole}>Confirm</button>
+                </form>
+              </div>
+            </div>}
           <div className="bottom-section">
             <hr className='loader' />
             <hr className='loadingPanel' />

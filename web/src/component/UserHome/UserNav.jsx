@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext} from 'react';
+import { UserContext } from '../../Store/UserContext';
 import './userStyle.css';
 import bell_icon from '../../assets/bell-icon.svg';
 import profile_icon from '../../assets/profile-icon.svg';
@@ -6,36 +7,65 @@ import profile_white_icon from '../../assets/profile-white-icon.svg';
 import set_icon from '../../assets/setting-icon.svg';
 import set_white_icon from '../../assets/setting-white-icon.svg';
 import { useAuth } from '../../Store/AuthContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../Config/Firebase'
 
 const UserNav = ({ active,onSelectChange,select}) => {
-  const [profileName, setProfileName] = useState('');
+  // const [profileName, setProfileName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const { currentUser } = useAuth();
+  const { user, setUser } = useContext(UserContext);
+
   
+  
+  const userId = user ? user : null;
+  console.log(user)
+
+  // const userId=""
+
 
   const handleSelect=(state)=>{
     onSelectChange(state)
   }
+
+  useEffect(() => {
+
+     }, []);
+
 //   console.log(currentUser);
   
-  useEffect(() => {
-    const fetchProfileName = async () => {
-      try {
-        if (currentUser) {
-          setProfileName(currentUser.displayName || 'Profile Name');
-          setEmail(currentUser.email || 'Emailaddress@gmail.com');
+useEffect(() => {
+  const items = JSON.parse(localStorage.getItem('user'));
+  if (items) {
+    setUser(items)
+  }
+
+  const fetchProfileName = async () => {
+    try {
+      // Check if userId is defined before fetching profile data
+      if (userId) {
+        const userDocRef = doc(db, "Users", userId);
+        const docSnapShot = await getDoc(userDocRef);
+
+        if (docSnapShot.exists()) {
+          const userData = docSnapShot.data();
+          setFirstName(userData.firstName || 'First Name');
+          setLastName(userData.lastName || 'Last Name');
+          setEmail(userData.emailID || 'Emailaddress@gmail.com');
         } else {
-          setProfileName('Profile Name');
+          setFirstName('First Name');
+          setLastName('Last Name');
           setEmail('Emailaddress@gmail.com');
-
         }
-      } catch (err) {
-        console.error('Error fetching profile name:', err);
       }
-    };
+    } catch (err) {
+      console.error('Error fetching profile name:', err);
+    }
+  };
 
-    fetchProfileName();
-  }, [currentUser]);
+  fetchProfileName();
+}, [userId]);
 
 
 
@@ -56,7 +86,7 @@ const UserNav = ({ active,onSelectChange,select}) => {
             <div className='leftside'>
             {select ? <img src={profile_white_icon} alt='profile' /> : <img src={profile_icon} alt='alternate profile' />}
               <div className='text-container' style={select?{display:"none",opacity:"0"}:{display:"flex",opacity:"1"}}>
-                <span className='main-title'>{profileName}</span>
+                <span className='main-title'>{firstName} {lastName}</span>
                 <span className='sub-title'>{email}</span>
               </div>
             </div>

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import './signin.css';
 import { useNavigate } from 'react-router-dom';
 import google_icon from '../../../assets/google-icon.svg';
 import { auth } from '../../../Config/Firebase'
+import { UserContext } from '../../../Store/UserContext';
 import { signInWithEmailAndPassword,GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import {db} from "../../../Config/Firebase"
 
 const SignIn = () => {
     const [optionbar, setOptionbar] = useState(true);
@@ -14,6 +17,11 @@ const SignIn = () => {
     const [error1,setError1]=useState("")
 
     const navigate = useNavigate()
+
+  const { user, setUser } = useContext(UserContext);
+
+  //   console.log(user);
+
 
 
     const handleButtonClick = (role) => {
@@ -30,7 +38,25 @@ const SignIn = () => {
             return
           }
         try{
-            await signInWithEmailAndPassword(auth,email,pass)
+            const result = await signInWithEmailAndPassword(auth,email,pass)
+            const user = result.user
+            console.log(user.email)
+
+            const userSnapshot = await getDocs(query(collection(db,"Users"),where("emailID","==",user.email)))
+
+            if(!userSnapshot.empty){
+                userSnapshot.forEach((doc)=>{
+                    const userID=doc.id;
+
+                    console.log("User ID:", userID);
+
+                    localStorage.setItem("user",JSON.stringify(userID));
+
+                })
+            }else{
+                console.log("No user found with email:", user.email);
+            }
+
             SetEmail("")
             SetPass("")
             navigate('/userpage');
@@ -38,11 +64,12 @@ const SignIn = () => {
         } catch(err){
             if(err.code= "auth/invalid-credential"){
                 setError("Invaild Email or Password.")
+                console.log(err);
             }
         } 
     }
 
-    console.log(auth.currentUser)
+    // console.log(auth.currentUser)
 
     // Login with google account-----
     const handleSignInWithGoogle = async()=>{
