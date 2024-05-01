@@ -63,7 +63,7 @@ const ProfilePop = ({select}) => {
             setYear(presentyear - startDate + 1);
             console.log(year)
           }else{
-            console.log("The year is not defined",startDate,FinishDate);
+            // console.log("The year is not defined",startDate,FinishDate);
           }
 
           // switch(year){

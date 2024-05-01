@@ -7,7 +7,7 @@ const Semester = ({sem}) => {
     <>
         <div className="semester-container">
           <div className="cover-section">
-            <h1 className="title">Semester {sem}</h1>
+            <h1 className="title">{sem}</h1>
           </div>
         </div>
     </>
