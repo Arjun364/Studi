@@ -64,7 +64,7 @@ const UserSidebar = ({active, onMenuChange}) => {
       <Link to='/userpage/settings'><div id='Setting' className={active === "Settings" ?'lio activeMenu':'lio '}
       onClick={()=>{ActiveHandler("Settings")}}>
       <img className={active === "Settings"? 'img-active':''} src={Setting_icon} alt="" />
-      Setting</div></Link>
+      Settings</div></Link>
       </div>
     </div>
     </>

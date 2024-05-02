@@ -737,7 +737,7 @@
     /* margin-right: 38.5rem;  */
 }
 
-.subject-details-container .note{
+.subject-details-container .notes{
     display: flex;
     width:70.563rem ;
     height: 20.25em;
@@ -746,9 +746,11 @@
     padding: 1rem 2rem;
     flex-direction: column;
     gap: 1.375rem; 
+    /* overflow-x: hidden;
+    overflow-y: auto; */
 }
 
-.subject-details-container .notes{
+.subject-details-container .note{
     width: 24.563rem;
     height:3.438rem ;
     background-color: #545454;
@@ -757,9 +759,10 @@
     justify-content: center;
     border-radius:  0.5rem; 
     gap: 12rem;
+    cursor: pointer;
 }
 
-.subject-details-container .notes .left-side{
+.subject-details-container .note .left-side{
     color: white;
     display: flex;
     justify-content:center;
@@ -767,9 +770,219 @@
     gap:1.25rem ; 
 }
 
-.subject-details-container .notes .right-side{
+.subject-details-container .note .right-side{
     display: flex;
     justify-content: center;
     align-items:center;
     flex-direction: column;   
 }
+
+
+
+
+/* settings-section ---------------------------------------- */
+
+.settings-container{
+    width: 100%;
+    /* height: 38.125rem; */
+    /* background-color: white; */
+    /* border-radius: .75rem; */
+    color: black;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 2rem;
+}
+
+/* edit profile -section ------------------------------------ */
+
+.editprofile-container{
+    width: 71.998rem;
+    background-color: white;
+    height: 25rem;
+    border-radius: .75rem;
+    box-shadow: 2px 3px 1rem rgba(0, 0, 0, 0.368);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+.editprofile-container .top-section{
+    width: 100%;
+    height: 3.813rem;
+    display: flex;
+    /* align-items: center; */
+    justify-content: left;
+    flex-direction: column;
+    
+}
+.editprofile-container .top-section .title{
+    padding-left: 2rem;
+    font-size: 2rem;
+    font-weight: 500;
+
+    
+}
+.editprofile-container .top-section .line{
+    width: 100%;
+    height: .1rem;
+    
+}
+.editprofile-container .bottom-section{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 3rem;
+    width: 100%;
+    padding-left: 4rem;
+    /* padding-top: 1rem; */
+    
+}
+.editprofile-container .bottom-section .left-side img{ 
+    width: 14rem;
+    
+}
+.editprofile-container .bottom-section .right-side{ 
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    
+    
+}
+.editprofile-container .bottom-section .right-side .top-side { 
+    display: flex;
+    /* flex-direction: column; */
+    /* width: 30rem; */
+    gap: 1rem;
+
+    
+}
+.editprofile-container .bottom-section .right-side .top-side label{ 
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    height: 5rem; 
+    font-size: 1.3rem;
+    font-weight: 500;
+    gap: .3rem;
+}
+.editprofile-container .bottom-section .right-side .top-side label input{ 
+    width: 20rem;
+    height: 3rem; 
+    padding-left: .5rem;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: .4rem;
+    
+}
+.editprofile-container .bottom-section .right-side .top-side label input::placeholder{ 
+    color: black;
+    
+}
+.editprofile-container .bottom-section .right-side .bottom-side{ 
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    
+}
+.editprofile-container .bottom-section .right-side .bottom-side label { 
+    width: 41rem;
+    height: 3rem;
+    border: 2px solid black;
+    border-radius: .3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rem 1rem;   
+}
+.editprofile-container .bottom-section .right-side .bottom-side label input{ 
+    width: 33rem;
+    height: 2.5rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+  
+}
+.editprofile-container .bottom-section .right-side .bottom-side label input::placeholder{   
+    color: black;
+    font-size: 1rem;
+}
+.editprofile-container .bottom-section .right-side .bottom-side label .verify-btn{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .1rem .5rem;
+    border-radius: .3rem;
+    background-color: black;
+    color: white;
+}
+.editprofile-container .bottom-section .right-side .bottom-side .submit-section {   
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+}
+.editprofile-container .bottom-section .right-side .bottom-side .submit-section .btn{ 
+    font-size: 1rem;
+}
+.editprofile-container .bottom-section .right-side .bottom-side .submit-section .cancel-btn{ 
+    background-color: white;
+    color:black;
+}
+ 
+
+
+/* Delete Account Section ------------------------------------ */
+
+.delete-container{
+    width: 72.213rem;
+    height: 4.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-direction: column; */
+    /* background-color:#E2E2E2  */
+    background-color: white;
+    gap: 3rem;
+    border-radius: .3rem;
+    box-shadow: 2px 3px 1rem rgba(0, 0, 0, 0.368);
+
+    
+}
+
+.delete-container .delete{
+    width: 67.688rem;
+    height:4.563rem; 
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1.25rem;
+ }
+ 
+ .delete-container .text{
+     font-size:1.25rem ;
+     font-weight:300;
+ }
+ 
+ .delete-container  .dlt-btn{
+     width:13.063rem ;
+     height:2.5rem ;
+     background-color: #FF0000;
+     border: none;
+     color: white;
+     font-size:1rem ;
+     font-weight: 600;
+     border-radius: 0.375rem;
+ }
+ .delete-container  .dlt-btn::hover{
+    background-color: white;
+    color: #FF0000;
+ }
+ 

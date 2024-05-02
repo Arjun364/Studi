@@ -1,32 +1,47 @@
-import React, { useEffect, useState } from 'react'
-import "../../userStyle.css"
-import adobeIcon from "../../../../assets/drive-pdf.png"
-import downloadIcon from "../../../../assets/download.png"
-import backIcon from "../../../../assets/back.svg"
-import { doc, getDoc } from 'firebase/firestore'
+import React, { useEffect, useState } from 'react';
+import "../../userStyle.css";
+import adobeIcon from "../../../../assets/drive-pdf.png";
+import downloadIcon from "../../../../assets/download.png";
+import backIcon from "../../../../assets/back.svg";
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../../../Config/Firebase';
 
 const Subject = ({ onBackButtonClick }) => {
+    const [selectModule, setSelectModule] = useState(false);
+    const [subject, setSubject] = useState("");
+    const [semester, setSemester] = useState("");
+    const [module, setModule] = useState("");
+    const [noteData, setNoteData] = useState([]);
+    const [modulelistAr, setModulelistAr] = useState([]);
 
-    const [selectModule, setSelectModule] = useState(false)
-    const [subject, setSubject] = useState()
-    const [modulelistAr, setModulelistAr] = useState([])
     const handleSub = () => {
-
+        localStorage.setItem("module", JSON.stringify(0));
+        localStorage.setItem("sub", JSON.stringify(""));
+        localStorage.setItem("sem", JSON.stringify(""));
         onBackButtonClick();
-    }
+    };
 
-    const handleModule=(mod)=>{
-        setSelectModule(mod)
-        localStorage.setItem("module", JSON.stringify(mod+1));
-
-    }
-
+    const handleModule = (mod) => {
+        setSelectModule(mod);
+        localStorage.setItem("module", JSON.stringify(mod + 1));
+        setModule(mod+1)
+    };
 
     useEffect(() => {
-        const items = JSON.parse(localStorage.getItem('sub'));
-        if (items) {
-            setSubject(items)
+        const sub = JSON.parse(localStorage.getItem('sub'));
+        if (sub) {
+            setSubject(sub);
+        }
+
+        const semester = JSON.parse(localStorage.getItem('sem'));
+        if (semester) {
+            setSemester(semester);
+        }
+
+        // Update module state from localStorage
+        const moduleFromLocalStorage = JSON.parse(localStorage.getItem('module'));
+        if (moduleFromLocalStorage) {
+            // setModule(moduleFromLocalStorage);
         }
 
         const fetchModuleList = async () => {
@@ -46,10 +61,32 @@ const Subject = ({ onBackButtonClick }) => {
             } catch (err) {
                 console.error(err);
             }
-        }
+        };
 
+        const fetchNotes = async () => {
+            try {
+                const noteQuery = query(
+                    collection(db, "StudyMaterials"),
+                    where("semester", "==", semester),
+                    where("subject", "==", subject), // Use subject instead of sub
+                    where("module", "==", module),
+                );
+        
+                const querySnapshot = await getDocs(noteQuery);
+        
+                const notesData = querySnapshot.docs.map(doc => doc.data());
+        
+                setNoteData(notesData);
+                localStorage.setItem("notesData", JSON.stringify(notesData));
+                console.log("fetched notes: ", notesData);
+            } catch (err) {
+                console.error("error fetching the notes", err);
+            }
+        };
+        
+        fetchNotes();
         fetchModuleList();
-    }, [])
+    }, [semester, subject, module]);
 
     return (
         <>
@@ -74,41 +111,34 @@ const Subject = ({ onBackButtonClick }) => {
                             }
                             return null;
                         })}
-                        {/* <div className="modules">Module 2</div>
-                <div className="modules">Module 3</div>
-                <div className="modules">Module 4</div>
-                <div className="modules">Module 5</div>
-                <div className="modules">Module 6</div> */}
                     </div>
                 </div>
                 <div className="subject-details-container">
                     <div className="menulist">
                         <div className="nav">
                             <a className="hovering">Pdf Notes</a>
-                            <a className="hovering">Youtube Links</a>
-                            <a className="hovering">Prepared Notes</a>
-                            <a className="hovering">Comments</a>
                         </div>
                         <hr className='line' />
                     </div>
                     <div className="bottom">
-                        <div className="note">
-                            <div className="notes">
-                                <div className="left-side">
-                                    <img src={adobeIcon} alt="Pdf icon" />
-                                    <p className="text"> Note 1.pdf</p>
-                                </div>
-                                <div className="right-side">
-                                    <img src={downloadIcon} alt="Download icon" />
-                                </div>
-                            </div>
+                        <div className="notes">
+                            {noteData.map((note, index) => (
+                                <a key={index} className="note" href={note.resourceLink || note.resourceLink } target='blank'>
+                                    <div className="left-side">
+                                        <img src={adobeIcon} alt="Pdf icon" />
+                                        <p className="text">Note {index+1}</p>
+                                    </div>
+                                    <div className="right-side">
+                                        <img src={downloadIcon} alt="Download icon" />
+                                    </div>
+                                </a>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
-
         </>
-    )
-}
+    );
+};
 
-export default Subject
+export default Subject;
