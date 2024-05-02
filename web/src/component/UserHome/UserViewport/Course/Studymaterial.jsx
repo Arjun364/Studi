@@ -56,7 +56,6 @@ const Studymaterial = ({ onSubClick }) => {
 
               return (
                 <div key={sem} onClick={() => handleClick(sem)}>
-                  {}
                   <Semester sem={sem} />
                 </div>
               );

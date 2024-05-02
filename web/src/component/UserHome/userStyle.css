@@ -650,11 +650,8 @@
     height: 4rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    /* margin-left: 2rem; */
-    align-items: center;
-    justify-content: center;
-    width: 67.5rem;
+    justify-content: start;
+    padding-left: 3rem;
     font-size: 1.25rem;
     gap: 1.213rem;
     /* margin-top: 2rem; */
@@ -675,6 +672,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    cursor: pointer;
    
 }
 
